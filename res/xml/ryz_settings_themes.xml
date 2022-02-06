@@ -73,4 +73,16 @@
             android:summary="@string/themes_navigation_bar_icons_summary"
             android:fragment="com.ryz.settings.fragments.themes.NavigationBarIcons"/>
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="themes_animations_category"
+        android:title="@string/themes_animations_category">
+
+        <!-- Charging animation -->
+        <com.ryz.settings.preferences.SystemSettingSwitchPreference
+            android:key="charging_animation"
+            android:title="@string/themes_charging_animation_title"
+            android:summary="@string/themes_charging_animation_summary"
+            android:defaultValue="true" />
+    </PreferenceCategory>
 </PreferenceScreen>

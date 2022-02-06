@@ -208,6 +208,8 @@
     <string name="themes_wifi_icon_summary">Set Wi-Fi icon style</string>
     <string name="themes_navigation_bar_icons_title">Navigation bar icons</string>
     <string name="themes_navigation_bar_icons_summary">Set navigation bar icon style</string>
+    <string name="themes_charging_animation_title">Charging animation</string>
+    <string name="themes_charging_animation_summary">Display an animation when the device is plugged in</string>
 
     <!-- About -->
     <string name="about_info">RyzTune is our way of helping you take back control, simply and personally.</string>
