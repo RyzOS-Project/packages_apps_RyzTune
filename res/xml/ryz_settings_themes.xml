@@ -52,7 +52,7 @@
             android:key="android.theme.customization.fonts"
             android:title="@string/themes_system_font_title"
             android:summary="@string/themes_system_font_summary"
-            android:fragment="com.ryz.settings.fragments.themes.Fonts"/>
+            android:fragment="com.ryz.settings.fragments.themes.Fonfonts.FontPickerPreviewts"/>
     </PreferenceCategory>
 
     <PreferenceCategory
