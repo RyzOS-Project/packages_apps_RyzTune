@@ -10,4 +10,16 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/themes_title">
 
+    <PreferenceCategory
+        android:key="themes_monet_category"
+        android:title="@string/themes_monet_category">
+
+        <!-- Monet engine -->
+        <Preference
+            android:key="monet_engine"
+            android:title="@string/themes_monet_title"
+            android:summary="@string/themes_monet_summary"
+            android:fragment="com.ryz.settings.fragments.themes.MonetSettings" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
