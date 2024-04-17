@@ -104,7 +104,11 @@
     <string name="themes_system_icons_summary">Set system icon style</string>
     <string name="themes_icon_shape_title">Icon shape</string>
     <string name="themes_icon_shape_summary">Set system icon shape</string>
-    
+    <string name="themes_signal_icon_title">Signal icon</string>
+    <string name="themes_signal_icon_summary">Set signal icon style</string>
+    <string name="themes_wifi_icon_title">Wi-Fi icon</string>
+    <string name="themes_wifi_icon_summary">Set Wi-Fi icon style</string>
+
     <!-- About -->
     <string name="about_info">RyzTune is our way of helping you take back control, simply and personally.</string>
     <string name="about_website_title">Website</string>
