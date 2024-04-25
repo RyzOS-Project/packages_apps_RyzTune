@@ -72,6 +72,9 @@
     <string name="lock_screen_fingerprint_ripple_summary">Show ripple animation when unlocked with fingerprint</string>
 
     <!-- Status bar -->
+    <string name="status_bar_gestures_category">Gestures</string>
+    <string name="status_bar_brightness_control_title">Brightness control</string>
+    <string name="status_bar_brightness_control_summary">Adjust brightness by swiping across the status bar</string>
     <string name="status_bar_quick_pull_down_title">Quick pull down</string>
     <string name="status_bar_quick_pull_down_summary">%1$s of the status bar pulls down quick settings</string>
     <string name="status_bar_quick_pull_down_off">Off</string>
