@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2024 Evolution X
+     Copyright (C) 2021-2025 RyzOS
+     SPDX-License-Identifier: Apache-2.0
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/about_title">
+
+    <!-- RyzOS logo -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="ryz_logo"
+        android:layout="@layout/ryz_logo"
+        android:clickable="false"
+        settings:controller="com.android.settings.deviceinfo.firmwareversion.RyzLogoPreferenceController"/>
+
+    <!-- Info -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/about_info" />
+
+    <PreferenceCategory
+        android:key="contributors"
+        android:title="@string/about_contributors_title" />
+
+    <!-- Contributor 1 -->
+        <Preference
+            android:title="@string/about_contributor_1_title"
+            android:summary="@string/about_contributor_1_summary">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://linktr.ee/joeyhuab" />
+        </Preference>
+
+</PreferenceScreen>
