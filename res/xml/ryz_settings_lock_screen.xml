@@ -14,6 +14,12 @@
         android:key="lock_screen_interface_category"
         android:title="@string/lock_screen_interface_category">
 
+        <com.ryz.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_show_carrier"
+            android:title="@string/status_bar_carrier_lock_screen_title"
+            android:summary="@string/status_bar_carrier_lock_screen_summary"
+            android:defaultValue="true" />
+
         <!-- Charging stats -->
         <com.ryz.settings.preferences.SystemSettingSwitchPreference
             android:key="lockscreen_battery_info"
