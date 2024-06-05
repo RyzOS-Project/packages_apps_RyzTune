@@ -38,7 +38,10 @@
     <string name="themes_audio_category">Audio</string>
     <string name="themes_lock_sound_title">Lock sound</string>
     <string name="themes_unlock_sound_title">Unlock sound</string>
-
+    <string name="themes_brightness_category">Brightness slider</string>
+    <string name="themes_brightness_slider_title">Brightness slider style</string>
+    <string name="themes_brightness_slider_summary">Set brightness slider style</string>
+    
     <!-- Themes/Monet Engine -->
     <string name="monet_engine_custom_color_title">Accent color</string>
     <string name="monet_engine_custom_color_summary">Choose custom color for accent</string>
