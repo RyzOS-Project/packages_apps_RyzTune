@@ -28,9 +28,11 @@ import com.android.internal.util.android.ThemeUtils;
 
 import java.util.List;
 
+import com.ryz.settings.preferences.GlobalSettingListPreference;
 import com.ryz.settings.preferences.SystemSettingListPreference;
 import com.ryz.settings.utils.DeviceUtils;
 import com.ryz.settings.utils.SystemRestartUtils;
+import com.ryz.settings.utils.SystemUtils;
 
 @SearchIndexable
 public class Themes extends SettingsPreferenceFragment implements
@@ -40,6 +42,8 @@ public class Themes extends SettingsPreferenceFragment implements
 
     private static final String KEY_PGB_STYLE = "progress_bar_style";
 
+    private static final String KEY_LOCK_SOUND = "lock_sound";
+    private static final String KEY_UNLOCK_SOUND = "unlock_sound";
     private static final String KEY_ICONS_CATEGORY = "themes_icons_category";
     private static final String KEY_NAVBAR_ICON = "android.theme.customization.navbar";
     private static final String KEY_SIGNAL_ICON = "android.theme.customization.signal_icon";
@@ -51,6 +55,8 @@ public class Themes extends SettingsPreferenceFragment implements
             "com.android.theme.progressbar.shishu"
     };
 
+    private GlobalSettingListPreference mLockSound;
+    private GlobalSettingListPreference mUnlockSound;
     private PreferenceCategory mIconsCategory;
     private Preference mNavbarIcon;
     private Preference mSignalIcon;
@@ -68,6 +74,10 @@ public class Themes extends SettingsPreferenceFragment implements
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final Resources resources = context.getResources();
 
+        mLockSound = (GlobalSettingListPreference) findPreference(KEY_LOCK_SOUND);
+        mLockSound.setOnPreferenceChangeListener(this);
+        mUnlockSound = (GlobalSettingListPreference) findPreference(KEY_UNLOCK_SOUND);
+        mUnlockSound.setOnPreferenceChangeListener(this);
         mIconsCategory = (PreferenceCategory) findPreference(KEY_ICONS_CATEGORY);
         mNavbarIcon = (Preference) findPreference(KEY_NAVBAR_ICON);
         mSignalIcon = (Preference) findPreference(KEY_SIGNAL_ICON);
@@ -111,6 +121,20 @@ public class Themes extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
+        // Ensure newValue is a valid integer before parsing
+        int value = 0;
+        if (newValue instanceof String) {
+            try {
+                value = Integer.parseInt((String) newValue);
+            } catch (NumberFormatException e) {
+                // Handle the case where newValue is not an integer (like a file path)
+                if (preference == mLockSound || preference == mUnlockSound) {
+                    SystemUtils.showSystemUiRestartDialog(context);
+                    return true;
+                }
+                return false;
+            }
+        }
         if (preference == mProgressBarPref) {
             Settings.System.putIntForUser(getActivity().getContentResolver(),
                     KEY_PGB_STYLE, value, UserHandle.USER_CURRENT);

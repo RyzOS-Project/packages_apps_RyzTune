@@ -35,7 +35,10 @@
     <string name="themes_monet_category">Monet</string>
     <string name="themes_monet_title">Monet settings</string>
     <string name="themes_monet_summary">Customize Android\'s built-in theme engine</string>
-    
+    <string name="themes_audio_category">Audio</string>
+    <string name="themes_lock_sound_title">Lock sound</string>
+    <string name="themes_unlock_sound_title">Unlock sound</string>
+
     <!-- Themes/Monet Engine -->
     <string name="monet_engine_custom_color_title">Accent color</string>
     <string name="monet_engine_custom_color_summary">Choose custom color for accent</string>
@@ -457,4 +460,10 @@
     <string name="progress_bar_style2">Minimal thumb</string>
     <string name="progress_bar_style3">Outline thumb</string>
     <string name="progress_bar_style4">Shishu</string>
+
+    <!-- SystemUI restart dialog -->
+    <string name="systemui_restart_title">SystemUI restart required</string>
+    <string name="systemui_restart_message">For changes to take effect, a SystemUI restart is required. Restart SystemUI now?</string>
+    <string name="systemui_restart_yes">Yes</string>
+    <string name="systemui_restart_not_now">Not now</string>
 </resources>
