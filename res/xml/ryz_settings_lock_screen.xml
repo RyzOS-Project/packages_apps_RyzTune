@@ -26,6 +26,18 @@
             android:entryValues="@array/clock_style_values" />
     </PreferenceCategory>
 
+    <PreferenceCategoryAdd commentMore actions
+        android:key="lockscreen_widgets"
+        android:title="@string/lockscreen_widgets_title">
+
+        <!-- Lockscreen Widgets -->
+        <Preference
+            android:key="lockscreen_widgets"
+            android:title="@string/lockscreen_widgets_title"
+            android:summary="@string/lockscreen_widgets_enabled_summary"
+            android:fragment="com.ryz.settings.fragments.lockscreen.LockScreenWidgets" />
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:key="lock_screen_interface_category"
         android:title="@string/lock_screen_interface_category">
