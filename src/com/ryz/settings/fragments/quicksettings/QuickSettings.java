@@ -35,6 +35,7 @@ import lineageos.providers.LineageSettings;
 import com.ryz.settings.preferences.SystemSettingListPreference;
 import com.ryz.settings.preferences.SystemSettingSwitchPreference;
 import com.ryz.settings.utils.DeviceUtils;
+import com.ryz.settings.utils.SystemUtils;
 
 @SearchIndexable
 public class QuickSettings extends SettingsPreferenceFragment implements
@@ -48,6 +49,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_INTERFACE_CATEGORY = "quick_settings_interface_category";
     private static final String KEY_MISCELLANEOUS_CATEGORY = "quick_settings_miscellaneous_category";
     private static final String KEY_QS_BLUETOOTH_SHOW_DIALOG = "qs_bt_show_dialog";
+    private static final String KEY_QS_WIDGETS_ENABLED  = "qs_widgets_enabled";
     private static final String KEY_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
     private static final String KEY_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
 
@@ -63,6 +65,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SystemSettingListPreference mBatteryStyle;
     private SystemSettingListPreference mBatteryPercent;
     private SystemSettingSwitchPreference mSplitShadePref;
+    private SystemSettingSwitchPreference mQsWidgetsPref;
 
     private Handler mHandler = new Handler();
 
@@ -94,6 +97,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
 
         mBrightnessSliderPosition = findPreference(KEY_BRIGHTNESS_SLIDER_POSITION);
         mBrightnessSliderPosition.setEnabled(showSlider);
+
+        mQsWidgetsPref = findPreference(KEY_QS_WIDGETS_ENABLED);
+        mQsWidgetsPref.setOnPreferenceChangeListener(this);
 
         mSplitShadePref = (SystemSettingSwitchPreference) findPreference("qs_split_shade_enabled");
         mSplitShadePref.setOnPreferenceChangeListener(this);
@@ -134,6 +140,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             Settings.System.putIntForUser(resolver,
                    "qs_split_shade_enabled", value, UserHandle.USER_CURRENT);
             updateSplitShadeEnabled(getActivity());
+            return true;
+        } else if (preference == mQsWidgetsPref) {
+            SystemUtils.showSystemUiRestartDialog(context);
             return true;
         }
         return false;

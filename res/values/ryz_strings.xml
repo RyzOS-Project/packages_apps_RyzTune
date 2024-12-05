@@ -297,7 +297,7 @@
     <string name="quick_settings_miscellaneous_category">Miscellaneous</string>
     <string name="quick_settings_bluetooth_show_dialog_title">Bluetooth tile dialog</string>
     <string name="quick_settings_bluetooth_show_dialog_summary">Show bluetooth dialog or toggle bluetooth state on tapping bluetooth tile</string>
-    <string name="quick_settings_header_image_title">Header image</string>
+    <string name="quick_settings_header_image_title">QS header image</string>
     <string name="quick_settings_header_image_summary">Select QS background header image</string>
     <string name="quick_settings_header_daylight_pack_title">Header image collection</string>
     <string name="quick_settings_header_shadow_title">Header image shadow</string>
@@ -564,4 +564,8 @@
     <!-- Squiggle animation -->
     <string name="show_squiggle_animation_title">Show squiggle animation</string>
     <string name="show_squiggle_animation_summary">Show media panel squiggle animation\nAfter change need to switch music, pause music or move the progress bar to apply</string>
+
+    <!-- QS Widgets -->
+    <string name="qs_widgets_enabled_title">QS widgets</string>
+    <string name="qs_widgets_enabled_summary">Show widgets for quick access. \nLimits QS rows to 2 to avoid breaking AOSP QS Panel scrolling</string>
 </resources>
