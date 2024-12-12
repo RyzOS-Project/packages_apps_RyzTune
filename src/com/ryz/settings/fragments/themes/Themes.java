@@ -10,6 +10,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
@@ -22,8 +24,11 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.android.internal.util.android.ThemeUtils;
+
 import java.util.List;
 
+import com.ryz.settings.preferences.SystemSettingListPreference;
 import com.ryz.settings.utils.DeviceUtils;
 
 @SearchIndexable
@@ -32,18 +37,30 @@ public class Themes extends SettingsPreferenceFragment implements
 
     private static final String TAG = "Themes";
 
+    private static final String KEY_PGB_STYLE = "progress_bar_style";
+
     private static final String KEY_ICONS_CATEGORY = "themes_icons_category";
     private static final String KEY_NAVBAR_ICON = "android.theme.customization.navbar";
     private static final String KEY_SIGNAL_ICON = "android.theme.customization.signal_icon";
 
+    private static final String[] PROGRESS_BAR_OVERLAYS = {
+            "com.android.theme.progressbar.blocky_thumb",
+            "com.android.theme.progressbar.minimal_thumb",
+            "com.android.theme.progressbar.outline_thumb",
+            "com.android.theme.progressbar.shishu"
+    };
+
     private PreferenceCategory mIconsCategory;
     private Preference mNavbarIcon;
     private Preference mSignalIcon;
+    private SystemSettingListPreference mProgressBarPref;
+    private ThemeUtils mThemeUtils;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.ryz_settings_themes);
+        mThemeUtils = ThemeUtils.getInstance(getActivity());
 
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
@@ -53,6 +70,8 @@ public class Themes extends SettingsPreferenceFragment implements
         mIconsCategory = (PreferenceCategory) findPreference(KEY_ICONS_CATEGORY);
         mNavbarIcon = (Preference) findPreference(KEY_NAVBAR_ICON);
         mSignalIcon = (Preference) findPreference(KEY_SIGNAL_ICON);
+        mProgressBarPref = findPreference(KEY_PGB_STYLE);
+        mProgressBarPref.setOnPreferenceChangeListener(this);
 
         if (!DeviceUtils.deviceSupportsMobileData(context)) {
             mIconsCategory.removePreference(mSignalIcon);
@@ -63,10 +82,20 @@ public class Themes extends SettingsPreferenceFragment implements
         }
     }
 
+    private void updateProgressBarStyle() {
+        updateStyle(KEY_PGB_STYLE, "android.theme.customization.progress_bar", "android", 0, PROGRESS_BAR_OVERLAYS, false);
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
+        if (preference == mProgressBarPref) {
+            Settings.System.putIntForUser(getActivity().getContentResolver(),
+                    KEY_PGB_STYLE, value, UserHandle.USER_CURRENT);
+            updateProgressBarStyle();
+            return true;
+        }
         return false;
     }
 
