@@ -32,6 +32,12 @@
             android:title="@string/lock_screen_pulse_settings_title"
             android:summary="@string/lock_screen_pulse_settings_summary"
             android:fragment="com.ryz.settings.fragments.lockscreen.PulseSettings" />
+
+        <com.ryz.settings.preferences.SystemSettingSwitchPreference
+            android:key="keyguard_now_bar_enabled"
+            android:title="@string/keyguard_now_bar_enabled_title"
+            android:summary="@string/keyguard_now_bar_enabled_summary"
+            android:defaultValue="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
