@@ -70,6 +70,11 @@
     <string name="lock_screen_fingerprint_category">Fingerprint</string>
     <string name="lock_screen_fingerprint_ripple_title">Ripple animation</string>
     <string name="lock_screen_fingerprint_ripple_summary">Show ripple animation when unlocked with fingerprint</string>
+    <string name="lock_screen_miscellaneous_category">Miscellaneous</string>
+    <string name="lock_screen_pocket_detection_title">Pocket detection</string>
+    <string name="lock_screen_pocket_detection_summary">Block screen and button inputs when device is in pocket</string>
+    <string name="lock_screen_always_on_pocket_mode_title">Always on Pocket mode</string>
+    <string name="lock_screen_always_on_pocket_mode_summary">Always block screen and button inputs when screen is turned on</string>
 
     <!-- Status bar -->
     <string name="status_bar_gestures_category">Gestures</string>
