@@ -438,4 +438,8 @@
     <string name="keyguard_now_bar_enabled_summary">Enable now bar lock screen widgets</string>
     <string name="keyguard_now_bar_height_title">Now bar height</string>
     <string name="keyguard_now_bar_height_summary">Adjust the height of the Now bar</string>
+
+    <!-- Split Shade -->
+    <string name="qs_split_shade_enabled_title">Better Landscape QS (EXPERIMENTAL)</string>
+    <string name="qs_split_shade_enabled_summary">Enable new experimental split shade quicksettings,\nbreaks landscape headsup notifications</string>
 </resources>

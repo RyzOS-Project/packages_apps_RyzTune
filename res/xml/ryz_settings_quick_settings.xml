@@ -71,6 +71,12 @@
             android:entries="@array/status_bar_battery_percent_entries"
             android:entryValues="@array/status_bar_battery_percent_values"
             android:defaultValue="2" />
+
+        <com.ryz.settings.preferences.SystemSettingSwitchPreference
+            android:key="qs_split_shade_enabled"
+            android:title="@string/qs_split_shade_enabled_title"
+            android:summary="@string/qs_split_shade_enabled_summary"
+            android:defaultValue="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -10,6 +10,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 
@@ -63,6 +64,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private SystemSettingListPreference mBatteryStyle;
     private SystemSettingListPreference mBatteryPercent;
     private SystemSettingSwitchPreference mBrightnessSliderHaptic;
+    private SystemSettingSwitchPreference mSplitShadePref;
+
+    private Handler mHandler = new Handler();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,6 +100,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mBrightnessSliderHaptic = findPreference(KEY_BRIGHTNESS_SLIDER_HAPTIC);
         mBrightnessSliderHaptic.setEnabled(showSlider);
 
+
+        mSplitShadePref = (SystemSettingSwitchPreference) findPreference("qs_split_shade_enabled");
+        mSplitShadePref.setOnPreferenceChangeListener(this);
+
         mShowAutoBrightness = findPreference(KEY_SHOW_AUTO_BRIGHTNESS);
         boolean automaticAvailable = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_automatic_brightness_available);
@@ -128,8 +136,33 @@ public class QuickSettings extends SettingsPreferenceFragment implements
             mBatteryPercent.setEnabled(
                     value != BATTERY_STYLE_TEXT && value != BATTERY_STYLE_HIDDEN);
             return true;
+        } else if (preference == mSplitShadePref) {
+            int value = (boolean) newValue ? 1 : 0;
+            Settings.System.putIntForUser(resolver,
+                   "qs_split_shade_enabled", value, UserHandle.USER_CURRENT);
+            updateSplitShadeEnabled(getActivity());
+            return true;
         }
         return false;
+    }
+
+    private void updateSplitShadeEnabled(Context context) {
+        ContentResolver resolver = context.getContentResolver();
+        boolean splitShadeEnabled = Settings.System.getIntForUser(
+                resolver,
+                "qs_split_shade_enabled" , 0, UserHandle.USER_CURRENT) != 0;
+        String splitShadeStyleCategory = "android.theme.customization.better_qs";
+        String overlayThemeTarget  = "com.android.systemui";
+        String overlayThemePackage  = "com.android.system.qs.ui.better_qs";
+        if (mThemeUtils == null) {
+            mThemeUtils = ThemeUtils.getInstance(context);
+        }
+        mHandler.postDelayed(() -> {
+            mThemeUtils.setOverlayEnabled(splitShadeStyleCategory, overlayThemeTarget, overlayThemeTarget);
+            if (splitShadeEnabled) {
+                mThemeUtils.setOverlayEnabled(splitShadeStyleCategory, overlayThemePackage, overlayThemeTarget);
+            }
+        }, 1250);
     }
 
     @Override
