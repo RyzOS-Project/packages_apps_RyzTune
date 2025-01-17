@@ -49,6 +49,13 @@
         android:key="quick_settings_interface_category"
         android:title="@string/quick_settings_interface_category">
 
+        <!-- QS Header -->
+        <Preference
+            android:key="qs_header_image"
+            android:title="@string/quick_settings_header_image_title"
+            android:summary="@string/quick_settings_header_image_summary"
+            android:fragment="com.ryz.settings.fragments.quicksettings.QsHeaderImageSettings" />
+
         <!-- Battery styles -->
         <com.ryz.settings.preferences.SystemSettingListPreference
             android:key="qs_battery_style"
