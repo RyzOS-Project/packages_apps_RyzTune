@@ -25,7 +25,9 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.List;
 
+import com.ryz.settings.preferences.SystemPropertySwitchPreference;
 import com.ryz.settings.preferences.SystemSettingSwitchPreference;
+import com.ryz.settings.utils.SystemUtils;
 
 @SearchIndexable
 public class Notifications extends SettingsPreferenceFragment implements
@@ -35,9 +37,11 @@ public class Notifications extends SettingsPreferenceFragment implements
 
     private static final String KEY_ALERT_SLIDER_PREF = "alert_slider_notifications";
     private static final String KEY_INTERFACE_CATEGORY = "notifications_interface_category";
+    private static final String KEY_COMPACT_HUN = "persist.sys.compact_heads_up_notification.always_show";
 
     private PreferenceCategory mInterfaceCategory;
     private Preference mAlertSlider;
+    private SystemPropertySwitchPreference mCompactHUN;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,12 +60,19 @@ public class Notifications extends SettingsPreferenceFragment implements
         if (!mAlertSliderAvailable) {
             mInterfaceCategory.removePreference(mAlertSlider);
         }
+
+        mCompactHUN = (SystemPropertySwitchPreference) findPreference(KEY_COMPACT_HUN);
+        mCompactHUN.setOnPreferenceChangeListener(this);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
+        if (preference == mCompactHUN) {
+            SystemUtils.showSystemUiRestartDialog(context);
+            return true;
+        }
         return false;
     }
 

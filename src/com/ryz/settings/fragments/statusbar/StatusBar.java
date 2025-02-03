@@ -32,6 +32,7 @@ import lineageos.preference.LineageSystemSettingListPreference;
 import com.ryz.settings.preferences.SystemSettingListPreference;
 import com.ryz.settings.preferences.SystemSettingSwitchPreference;
 import com.ryz.settings.utils.DeviceUtils;
+import com.ryz.settings.utils.SystemUtils;
 
 @SearchIndexable
 public class StatusBar extends SettingsPreferenceFragment implements
@@ -48,6 +49,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private static final String KEY_DATA_DISABLED_ICON = "data_disabled_icon";
     private static final String KEY_BLUETOOTH_BATTERY_STATUS = "bluetooth_show_battery";
     private static final String KEY_FOUR_G_ICON = "show_fourg_icon";
+    private static final String KEY_COLORED_ICONS = "statusbar_colored_icons";
 
     private static final int PULLDOWN_DIR_NONE = 0;
     private static final int PULLDOWN_DIR_RIGHT = 1;
@@ -66,6 +68,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private SystemSettingSwitchPreference mDataDisabledIcon;
     private SystemSettingSwitchPreference mFourgIcon;
     private SystemSettingSwitchPreference mBluetoothBatteryStatus;
+    private SystemSettingSwitchPreference mColoredIcons;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,8 @@ public class StatusBar extends SettingsPreferenceFragment implements
         mDataDisabledIcon = (SystemSettingSwitchPreference) findPreference(KEY_DATA_DISABLED_ICON);
         mFourgIcon = (SystemSettingSwitchPreference) findPreference(KEY_FOUR_G_ICON);
         mBluetoothBatteryStatus = (SystemSettingSwitchPreference) findPreference(KEY_BLUETOOTH_BATTERY_STATUS);
+        mColoredIcons = (SystemSettingSwitchPreference) findPreference(KEY_COLORED_ICONS);
+        mColoredIcons.setOnPreferenceChangeListener(this);
 
         if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
             mQuickPulldown.setEntries(R.array.status_bar_quick_pull_down_entries_rtl);
@@ -143,6 +148,9 @@ public class StatusBar extends SettingsPreferenceFragment implements
                     Settings.System.STATUS_BAR_BATTERY_STYLE, BATTERY_STYLE_PORTRAIT, UserHandle.USER_CURRENT);
             mBatteryTextCharging.setEnabled(batterystyle == BATTERY_STYLE_HIDDEN ||
                     (batterystyle != BATTERY_STYLE_TEXT && value != 2));
+            return true;
+        } else if (preference == mColoredIcons) {
+            SystemUtils.showSystemUiRestartDialog(context);
             return true;
         }
         return false;
