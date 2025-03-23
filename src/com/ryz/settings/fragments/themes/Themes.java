@@ -45,7 +45,6 @@ public class Themes extends SettingsPreferenceFragment implements
     private static final String KEY_LOCK_SOUND = "lock_sound";
     private static final String KEY_UNLOCK_SOUND = "unlock_sound";
     private static final String KEY_ICONS_CATEGORY = "themes_icons_category";
-    private static final String KEY_NAVBAR_ICON = "android.theme.customization.navbar";
     private static final String KEY_SIGNAL_ICON = "android.theme.customization.signal_icon";
 
     private static final String[] PROGRESS_BAR_OVERLAYS = {
@@ -58,7 +57,6 @@ public class Themes extends SettingsPreferenceFragment implements
     private GlobalSettingListPreference mLockSound;
     private GlobalSettingListPreference mUnlockSound;
     private PreferenceCategory mIconsCategory;
-    private Preference mNavbarIcon;
     private Preference mSignalIcon;
     private SystemSettingListPreference mProgressBarPref;
     private ThemeUtils mThemeUtils;
@@ -79,17 +77,12 @@ public class Themes extends SettingsPreferenceFragment implements
         mUnlockSound = (GlobalSettingListPreference) findPreference(KEY_UNLOCK_SOUND);
         mUnlockSound.setOnPreferenceChangeListener(this);
         mIconsCategory = (PreferenceCategory) findPreference(KEY_ICONS_CATEGORY);
-        mNavbarIcon = (Preference) findPreference(KEY_NAVBAR_ICON);
         mSignalIcon = (Preference) findPreference(KEY_SIGNAL_ICON);
         mProgressBarPref = findPreference(KEY_PGB_STYLE);
         mProgressBarPref.setOnPreferenceChangeListener(this);
 
         if (!DeviceUtils.deviceSupportsMobileData(context)) {
             mIconsCategory.removePreference(mSignalIcon);
-        }
-
-        if (DeviceUtils.isEdgeToEdgeEnabled(context)) {
-            mIconsCategory.removePreference(mNavbarIcon);
         }
     }
 
