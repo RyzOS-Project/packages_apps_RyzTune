@@ -72,7 +72,7 @@ public class Themes extends SettingsPreferenceFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.RYZ;
+        return MetricsEvent.RYZTUNE;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
