@@ -13,9 +13,9 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 @SearchIndexable
-public class RyzSettings extends DashboardFragment {
+public class RyzTune extends DashboardFragment {
 
-    private static final String TAG = "RyzSettings";
+    private static final String TAG = "RyzTune";
 
     @Override
     protected int getPreferenceScreenResId() {
