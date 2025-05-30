@@ -30,13 +30,6 @@
             android:entryValues="@array/quick_settings_brightness_slider_position_values"
             android:defaultValue="0" />
 
-        <!-- Haptic feedback on brightness slider -->
-        <com.ryz.settings.preferences.SystemSettingSwitchPreference
-            android:key="qs_brightness_slider_haptic"
-            android:title="@string/quick_settings_brightness_slider_haptic_title"
-            android:summary="@string/quick_settings_brightness_slider_haptic_summary"
-            android:defaultValue="false" />
-
         <!-- Auto brightness icon -->
         <lineageos.preference.LineageSecureSettingSwitchPreference
             android:key="qs_show_auto_brightness"

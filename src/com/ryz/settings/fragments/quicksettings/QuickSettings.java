@@ -45,7 +45,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private static final String KEY_BATTERY_PERCENT = "qs_show_battery_percent";
     private static final String KEY_BATTERY_STYLE = "qs_battery_style";
     private static final String KEY_BRIGHTNESS_SLIDER_POSITION = "qs_brightness_slider_position";
-    private static final String KEY_BRIGHTNESS_SLIDER_HAPTIC = "qs_brightness_slider_haptic";
     private static final String KEY_INTERFACE_CATEGORY = "quick_settings_interface_category";
     private static final String KEY_MISCELLANEOUS_CATEGORY = "quick_settings_miscellaneous_category";
     private static final String KEY_QS_BLUETOOTH_SHOW_DIALOG = "qs_bt_show_dialog";
@@ -63,7 +62,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
     private LineageSecureSettingSwitchPreference mShowAutoBrightness;
     private SystemSettingListPreference mBatteryStyle;
     private SystemSettingListPreference mBatteryPercent;
-    private SystemSettingSwitchPreference mBrightnessSliderHaptic;
     private SystemSettingSwitchPreference mSplitShadePref;
 
     private Handler mHandler = new Handler();
@@ -97,10 +95,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mBrightnessSliderPosition = findPreference(KEY_BRIGHTNESS_SLIDER_POSITION);
         mBrightnessSliderPosition.setEnabled(showSlider);
 
-        mBrightnessSliderHaptic = findPreference(KEY_BRIGHTNESS_SLIDER_HAPTIC);
-        mBrightnessSliderHaptic.setEnabled(showSlider);
-
-
         mSplitShadePref = (SystemSettingSwitchPreference) findPreference("qs_split_shade_enabled");
         mSplitShadePref.setOnPreferenceChangeListener(this);
 
@@ -127,7 +121,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         if (preference == mShowBrightnessSlider) {
             int value = Integer.parseInt((String) newValue);
             mBrightnessSliderPosition.setEnabled(value > 0);
-            mBrightnessSliderHaptic.setEnabled(value > 0);
             if (mShowAutoBrightness != null)
                 mShowAutoBrightness.setEnabled(value > 0);
             return true;
