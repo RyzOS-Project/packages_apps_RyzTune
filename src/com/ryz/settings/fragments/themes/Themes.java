@@ -30,6 +30,7 @@ import java.util.List;
 
 import com.ryz.settings.preferences.SystemSettingListPreference;
 import com.ryz.settings.utils.DeviceUtils;
+import com.ryz.settings.utils.SystemRestartUtils;
 
 @SearchIndexable
 public class Themes extends SettingsPreferenceFragment implements
@@ -82,6 +83,26 @@ public class Themes extends SettingsPreferenceFragment implements
         }
     }
 
+    private void updateStyle(String key, String category, String target,
+            int defaultValue, String[] overlayPackages, boolean restartSystemUI) {
+        final int style = Settings.System.getIntForUser(
+                getContext().getContentResolver(),
+                key,
+                defaultValue,
+                UserHandle.USER_CURRENT
+        );
+        if (mThemeUtils == null) {
+            mThemeUtils = ThemeUtils.getInstance(getContext());
+        }
+        mThemeUtils.setOverlayEnabled(category, target, target);
+        if (style > 0 && style <= overlayPackages.length) {
+            mThemeUtils.setOverlayEnabled(category, overlayPackages[style - 1], target);
+        }
+        if (restartSystemUI) {
+            SystemRestartUtils.restartSystemUI(getContext());
+        }
+    }
+    
     private void updateProgressBarStyle() {
         updateStyle(KEY_PGB_STYLE, "android.theme.customization.progress_bar", "android", 0, PROGRESS_BAR_OVERLAYS, false);
     }
